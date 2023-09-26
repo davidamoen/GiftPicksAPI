@@ -9,7 +9,9 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddScoped<IPickerService, PickerService>();
+builder.Services.AddScoped<IFamilyService, FamilyService>();
+builder.Services.AddScoped<IRandomizerService, RandomizerService>();
+builder.Services.AddScoped<IRulesService, RulesService>();
 
 var app = builder.Build();
 

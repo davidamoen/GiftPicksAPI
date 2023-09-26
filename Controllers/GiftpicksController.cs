@@ -1,6 +1,10 @@
+using giftpicksapi.Enums;
+using giftpicksapi.Models;
 using giftpicksapi.Services;
 using Microsoft.AspNetCore.Mvc;
-using System.Text.Encodings.Web;
+using Microsoft.Extensions.ObjectPool;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace giftpicksapi.Controllers;
 
@@ -8,21 +12,42 @@ namespace giftpicksapi.Controllers;
 [Route("[controller]")]
 public class GiftpicksController : Controller
 {
-    private readonly IPickerService _pickerService;
-    private readonly ILogger<GiftpicksController> _logger;
+    private readonly IFamilyService familyService;
+    private readonly IRandomizerService randomizerService;
+    private readonly IRulesService rulesService;
+    private readonly ILogger<GiftpicksController> logger;
 
    public GiftpicksController(
-    ILogger<GiftpicksController> logger,
-    IPickerService pickerService
+    IFamilyService familyService,
+    IRandomizerService randomizerService,
+    IRulesService rulesService,
+    ILogger<GiftpicksController> logger
     )
     {
-        _logger = logger;
-        _pickerService = pickerService;
+        this.familyService = familyService;
+        this.randomizerService = randomizerService;
+        this.rulesService = rulesService;
+        this.logger = logger;
     }
 
-    [HttpGet(Name = "GetFamilyPicks")]
-    public List<string> Get()
+    [HttpGet("{familyname}", Name = "GetFamilyPicks")]
+    public Person Get([FromRoute] string familyname)
     {
-        return _pickerService.GetPicks("moen");
+        var family = familyService.GetFamily(familyname);
+        var hat = randomizerService.GetRandomizedCopy(family.Members);
+        var drawOrder = randomizerService.GetRandomizedCopy(family.Members);
+        var picker = new PickerService(hat, drawOrder, new Random(DateTime.Now.Millisecond));
+
+        var personDrawn = picker.DrawFromHat();
+
+        if (rulesService.PickOk(personDrawn, drawOrder.First())) {
+            Console.WriteLine($"{drawOrder.First().Name} can give to {personDrawn.Name}.");
+        }
+        else {
+            Console.WriteLine($"{drawOrder.First().Name} can NOT give to {personDrawn.Name}.");
+        }
+
+        return personDrawn; 
+
     }
 }
