@@ -23,6 +23,10 @@ public class FamilyService : IFamilyService
         return family;
     }
 
+    public Person GetFamilyMember(Family family, Members member) {
+        return family.Members.Where(m => m.Name == member).First();
+    }
+
     private List<Person> GetMoenFamily()
         {
             return new List<Person>()
