@@ -3,5 +3,5 @@ using giftpicksapi.Models;
 namespace giftpicksapi.Services;
 public interface IPickerService
 {
-    Person DrawFromHat();
+    Person DrawFromHat(Person personDrawing);
 }

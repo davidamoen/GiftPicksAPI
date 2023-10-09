@@ -251,4 +251,34 @@ public class RulesServiceTests : IClassFixture<RulesService>
         Assert.False(result, "pick OK");
     }
 
+    [Fact]
+    public void PickOk_returns_false_correctly_cindy_nicholas()
+    {
+        // arrange
+        var moenFamily = familyService.GetFamily("moen");
+        var cindy = familyService.GetFamilyMember(moenFamily, giftpicksapi.Enums.Members.Cindy);
+        var nicholas = familyService.GetFamilyMember(moenFamily, giftpicksapi.Enums.Members.Nicholas);
+
+        // act 
+        var result = rulesService.PickOk(cindy, nicholas);
+
+        // assert
+        Assert.False(result, "pick OK");
+    }        
+
+    [Fact]
+    public void PickOk_returns_true_correctly_sally_nicholas()
+    {
+        // arrange
+        var moenFamily = familyService.GetFamily("moen");
+        var cindy = familyService.GetFamilyMember(moenFamily, giftpicksapi.Enums.Members.Sally);
+        var nicholas = familyService.GetFamilyMember(moenFamily, giftpicksapi.Enums.Members.Nicholas);
+
+        // act 
+        var result = rulesService.PickOk(cindy, nicholas);
+
+        // assert
+        Assert.True(result, "pick OK");
+    }    
+
 }

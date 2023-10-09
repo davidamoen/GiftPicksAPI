@@ -31,23 +31,52 @@ public class GiftpicksController : Controller
     }
 
     [HttpGet("{familyname}", Name = "GetFamilyPicks")]
-    public Person Get([FromRoute] string familyname)
+    public Dictionary<string, string> Get([FromRoute] string familyname)
     {
+        Console.WriteLine($"Starting a drawing for the {familyname} family.  ");
         var family = familyService.GetFamily(familyname);
+        return Run(family);
+    }
+
+    private Dictionary<string, string> Run(Family family) 
+    {
         var hat = randomizerService.GetRandomizedCopy(family.Members);
         var drawOrder = randomizerService.GetRandomizedCopy(family.Members);
-        var picker = new PickerService(hat, drawOrder, new Random(DateTime.Now.Millisecond));
+        var picker = new PickerService(hat, new Random(DateTime.Now.Millisecond));
+        var results = new Dictionary<string, string>();
 
-        var personDrawn = picker.DrawFromHat();
+        foreach(var personDrawing in drawOrder)
+        {
+            var drawCount = 0;
+            var doneDrawing = false;
 
-        if (rulesService.PickOk(personDrawn, drawOrder.First())) {
-            Console.WriteLine($"{drawOrder.First().Name} can give to {personDrawn.Name}.");
+            while(!doneDrawing) 
+            {
+                Console.WriteLine($"{personDrawing.Name.ToString()} is drawing.");
+                var personDrawn = picker.DrawFromHat(personDrawing);
+
+                if (rulesService.PickOk(personDrawing, personDrawn)) 
+                {
+                    Console.WriteLine($"{personDrawing.Name} can give to {personDrawn.Name}.");
+                    hat.Remove(personDrawn);
+                    results.Add(personDrawing.Name.ToString(), personDrawn.Name.ToString());
+                    doneDrawing = true;
+                    drawCount = 0;
+                }
+                else 
+                {
+                    Console.WriteLine($"{personDrawing.Name} can NOT give to {personDrawn.Name}.");
+
+                    if (drawCount > 5)
+                    {
+                        Console.WriteLine("Too many fails, starting over");
+                        return Run(family);
+                    }
+                    drawCount++;
+                }
+            }
         }
-        else {
-            Console.WriteLine($"{drawOrder.First().Name} can NOT give to {personDrawn.Name}.");
-        }
 
-        return personDrawn; 
-
+        return results;
     }
 }

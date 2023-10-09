@@ -5,23 +5,20 @@ namespace giftpicksapi.Services;
 public class PickerService : IPickerService
 {
     private readonly List<Person> Hat;
-    private readonly List<Person> DrawOrder;
     private readonly Random R;
     public PickerService(
         List<Person> hat, 
-        List<Person> drawOrder,
         Random r)
     {
         this.Hat = hat;
-        this.DrawOrder = drawOrder;
         this.R = r;
     }
 
-    public Person DrawFromHat()
+    public Person DrawFromHat(Person personDrawing)
     {
         var idx = this.R.Next(0, this.Hat.Count);
         var personDrawnFromHat = this.Hat[idx];
-        Console.WriteLine($"{this.DrawOrder.First().Name} drew {personDrawnFromHat.Name}'s name from the hat.");
+        Console.WriteLine($"{personDrawing.Name} drew {personDrawnFromHat.Name}'s name from the hat.");
         return personDrawnFromHat;
     }
 }

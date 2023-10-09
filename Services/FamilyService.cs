@@ -34,12 +34,12 @@ public class FamilyService : IFamilyService
                 new(Members.Julie)
                 {
                     Spouse = Members.Mark,
-                    Children = { Members.Quinn }
+                    Children = { Members.Quinn, Members.Liv }
                 },
                 new(Members.Mark)
                 {
                     Spouse = Members.Julie,
-                    Children = { Members.Quinn }
+                    Children = { Members.Quinn, Members.Liv }
                 },
                 new(Members.Quinn) 
                 {
