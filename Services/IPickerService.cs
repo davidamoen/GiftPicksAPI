@@ -1,5 +1,7 @@
+using giftpicksapi.Models;
+
 namespace giftpicksapi.Services;
 public interface IPickerService
 {
-    List<string> GetPicks(string family);
+    Person DrawFromHat(Person personDrawing);
 }
