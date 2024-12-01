@@ -12,6 +12,12 @@ public class FamilyService : IFamilyService
 
         switch(familyName.ToLower())
         {
+            case "adults":
+                family.Members = GetAdults();
+                break;
+            case "kids":
+                family.Members = GetKids();
+                break;
             case "kremer":
                 family.Members = GetKremerFamily();
                 break;
@@ -26,6 +32,68 @@ public class FamilyService : IFamilyService
     public Person GetFamilyMember(Family family, Members member) {
         return family.Members.Where(m => m.Name == member).First();
     }
+
+    private List<Person> GetKids()
+        {
+            return new List<Person>()
+            {
+                new(Members.Quinn) 
+                {
+                    Spouse = Members.None,
+                    Siblings = { Members.Liv }
+                },
+                new(Members.Garrett)
+                {
+                    Spouse = Members.None,
+                    Siblings = { Members.Nicholas }
+                },
+                new(Members.Nicholas)
+                {
+                    Siblings = { Members.Garrett },
+                    Spouse = Members.Lilly
+                },
+                new(Members.Liv)
+                {
+                    Spouse = Members.None,
+                    Siblings = { Members.Quinn }
+                },
+                new(Members.Lilly) 
+                {
+                    Spouse = Members.Nicholas
+                }
+            };
+        }   
+
+    private List<Person> GetAdults()
+        {
+            return new List<Person>()
+            {
+                new(Members.Julie)
+                {
+                    Spouse = Members.Mark,
+                    Children = { Members.Quinn, Members.Liv }
+                },
+                new(Members.Mark)
+                {
+                    Spouse = Members.Julie,
+                    Children = { Members.Quinn, Members.Liv }
+                },
+                new(Members.Cindy)
+                {
+                    Spouse = Members.David,
+                    Children = { Members.Garrett, Members.Nicholas }
+                },
+                new(Members.David)
+                {
+                    Spouse = Members.Cindy,
+                    Children = { Members.Garrett, Members.Nicholas }
+                },
+                new(Members.Sally) 
+                {
+                    Spouse = Members.None
+                },
+            };
+        }    
 
     private List<Person> GetMoenFamily()
         {
@@ -47,10 +115,10 @@ public class FamilyService : IFamilyService
                 },
                 new(Members.Cindy)
                 {
-                    Spouse = Members.Dave,
+                    Spouse = Members.David,
                     Children = { Members.Garrett, Members.Nicholas }
                 },
-                new(Members.Dave)
+                new(Members.David)
                 {
                     Spouse = Members.Cindy,
                     Children = { Members.Garrett, Members.Nicholas }
@@ -72,10 +140,12 @@ public class FamilyService : IFamilyService
                 new(Members.Liv)
                 {
                     Spouse = Members.None
+                },
+                new(Members.Lilly) {
+                    Spouse = Members.None
                 }
             };
-        }    
-
+        }  
     private List<Person> GetKremerFamily()
         {
             return new List<Person>()
@@ -102,10 +172,10 @@ public class FamilyService : IFamilyService
                 },
                 new(Members.Cindy)
                 {
-                    Spouse = Members.Dave,
+                    Spouse = Members.David,
                     Children = { Members.Garrett, Members.Nicholas }
                 },
-                new(Members.Dave)
+                new(Members.David)
                 {
                     Spouse = Members.Cindy,
                     Children = { Members.Garrett, Members.Nicholas }

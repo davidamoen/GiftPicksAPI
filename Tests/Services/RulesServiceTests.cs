@@ -17,8 +17,8 @@ public class RulesServiceTests : IClassFixture<RulesService>
     public void IsSelf_returns_true_for_same_person()
     {
         // arrange
-        var person1 = new Person(giftpicksapi.Enums.Members.Dave);
-        var person2 = new Person(giftpicksapi.Enums.Members.Dave);
+        var person1 = new Person(giftpicksapi.Enums.Members.David);
+        var person2 = new Person(giftpicksapi.Enums.Members.David);
 
         // act 
         var result = rulesService.IsSelf(person1, person2);
@@ -31,7 +31,7 @@ public class RulesServiceTests : IClassFixture<RulesService>
     public void AreMarried_returns_true_for_spouses()
     {
         // arrange
-        var person1 = new Person(giftpicksapi.Enums.Members.Dave);
+        var person1 = new Person(giftpicksapi.Enums.Members.David);
         person1.Spouse = giftpicksapi.Enums.Members.Cindy;
         var person2 = new Person(giftpicksapi.Enums.Members.Cindy);
 
@@ -46,8 +46,8 @@ public class RulesServiceTests : IClassFixture<RulesService>
     public void AreMarried_returns_false_for_non_spouses()
     {
         // arrange
-        var person1 = new Person(giftpicksapi.Enums.Members.Dave);
-        person1.Spouse = giftpicksapi.Enums.Members.Dave;
+        var person1 = new Person(giftpicksapi.Enums.Members.David);
+        person1.Spouse = giftpicksapi.Enums.Members.David;
         var person2 = new Person(giftpicksapi.Enums.Members.Cindy);
 
         // act 
@@ -62,7 +62,7 @@ public class RulesServiceTests : IClassFixture<RulesService>
     {
         // arrange
         var person1 = new Person(giftpicksapi.Enums.Members.Garrett);
-        var person2 = new Person(giftpicksapi.Enums.Members.Dave);
+        var person2 = new Person(giftpicksapi.Enums.Members.David);
         person2.Children.Add(giftpicksapi.Enums.Members.Garrett);
 
         // act 
@@ -77,7 +77,7 @@ public class RulesServiceTests : IClassFixture<RulesService>
     {
         // arrange
         var person1 = new Person(giftpicksapi.Enums.Members.Garrett);
-        var person2 = new Person(giftpicksapi.Enums.Members.Dave);
+        var person2 = new Person(giftpicksapi.Enums.Members.David);
 
         // act 
         var result = rulesService.IsChild(person1, person2);
@@ -91,7 +91,7 @@ public class RulesServiceTests : IClassFixture<RulesService>
     {
         // arrange
         var person1 = new Person(giftpicksapi.Enums.Members.Garrett);
-        var person2 = new Person(giftpicksapi.Enums.Members.Dave);
+        var person2 = new Person(giftpicksapi.Enums.Members.David);
         person2.Children.Add(giftpicksapi.Enums.Members.Garrett);
 
         // act 
@@ -106,7 +106,7 @@ public class RulesServiceTests : IClassFixture<RulesService>
     {
         // arrange
         var person1 = new Person(giftpicksapi.Enums.Members.Garrett);
-        var person2 = new Person(giftpicksapi.Enums.Members.Dave);
+        var person2 = new Person(giftpicksapi.Enums.Members.David);
 
         // act 
         var result = rulesService.IsParent(person2, person1);
@@ -150,7 +150,7 @@ public class RulesServiceTests : IClassFixture<RulesService>
     {
         // arrange
         var kremerFamily = familyService.GetFamily("kremer");
-        var dave = familyService.GetFamilyMember(kremerFamily, giftpicksapi.Enums.Members.Dave);
+        var dave = familyService.GetFamilyMember(kremerFamily, giftpicksapi.Enums.Members.David);
         var jack = familyService.GetFamilyMember(kremerFamily, giftpicksapi.Enums.Members.Jack);
 
         // act 
@@ -165,7 +165,7 @@ public class RulesServiceTests : IClassFixture<RulesService>
     {
         // arrange
         var kremerFamily = familyService.GetFamily("kremer");
-        var dave = familyService.GetFamilyMember(kremerFamily, giftpicksapi.Enums.Members.Dave);
+        var dave = familyService.GetFamilyMember(kremerFamily, giftpicksapi.Enums.Members.David);
         var kevin = familyService.GetFamilyMember(kremerFamily, giftpicksapi.Enums.Members.Kevin);
 
         // act 
@@ -211,7 +211,7 @@ public class RulesServiceTests : IClassFixture<RulesService>
     {
         // arrange
         var kremerFamily = familyService.GetFamily("kremer");
-        var dave = familyService.GetFamilyMember(kremerFamily, giftpicksapi.Enums.Members.Dave);
+        var dave = familyService.GetFamilyMember(kremerFamily, giftpicksapi.Enums.Members.David);
         var cindy = familyService.GetFamilyMember(kremerFamily, giftpicksapi.Enums.Members.Cindy);
 
         // act 
@@ -226,7 +226,7 @@ public class RulesServiceTests : IClassFixture<RulesService>
     {
         // arrange
         var kremerFamily = familyService.GetFamily("kremer");
-        var dave = familyService.GetFamilyMember(kremerFamily, giftpicksapi.Enums.Members.Dave);
+        var dave = familyService.GetFamilyMember(kremerFamily, giftpicksapi.Enums.Members.David);
         var garrett = familyService.GetFamilyMember(kremerFamily, giftpicksapi.Enums.Members.Garrett);
 
         // act 

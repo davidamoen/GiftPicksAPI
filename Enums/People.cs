@@ -2,7 +2,9 @@ namespace giftpicksapi.Enums;
     public enum Families
     {
         Kremers,
-        Moens
+        Moens,
+        Adults,
+        Kids
     }
     public enum Members
         {
@@ -12,7 +14,7 @@ namespace giftpicksapi.Enums;
             Thomas,
             Cecelia,
             Cindy,
-            Dave,
+            David,
             Garrett,
             Nicholas,
             Lorna,
@@ -23,5 +25,6 @@ namespace giftpicksapi.Enums;
             Jacque,
             Quinn,
             Liv,
+            Lilly,
             None
         }
