@@ -153,19 +153,19 @@ public class FamilyService : IFamilyService
                 new(Members.Cari)
                 {
                     Spouse = Members.Kevin,
-                    Children = { Members.Aidan, Members.Thomas, Members.Cecelia }
+                    Children = { Members.Aidan, Members.Thomas, Members.Vincent }
                 },
                 new(Members.Kevin)
                 {
                     Spouse = Members.Cari,
-                    Children = { Members.Aidan, Members.Thomas, Members.Cecelia }
+                    Children = { Members.Aidan, Members.Thomas, Members.Vincent }
                 },
                 new(Members.Aidan)
                 {
                     Spouse = Members.None,
-                    Siblings = { Members.Thomas, Members.Cecelia }
+                    Siblings = { Members.Thomas, Members.Vincent }
                 },
-                new(Members.Cecelia)
+                new(Members.Vincent)
                 {
                     Spouse = Members.None,
                     Siblings = { Members.Aidan, Members.Thomas }

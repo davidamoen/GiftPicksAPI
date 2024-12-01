@@ -12,7 +12,7 @@ namespace giftpicksapi.Enums;
             Kevin,
             Aidan,
             Thomas,
-            Cecelia,
+            Vincent,
             Cindy,
             David,
             Garrett,

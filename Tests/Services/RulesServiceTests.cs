@@ -195,7 +195,7 @@ public class RulesServiceTests : IClassFixture<RulesService>
     {
         // arrange
         var kremerFamily = familyService.GetFamily("kremer");
-        var cecilia = familyService.GetFamilyMember(kremerFamily, giftpicksapi.Enums.Members.Cecelia);
+        var cecilia = familyService.GetFamilyMember(kremerFamily, giftpicksapi.Enums.Members.Vincent);
         var lorna = familyService.GetFamilyMember(kremerFamily, giftpicksapi.Enums.Members.Lorna);
 
         // act 
